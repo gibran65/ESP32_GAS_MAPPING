@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP32 GAS MAPPING</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>GAS MAPPING CONTROL PANEL</h1>
+  <div id="map-container"></div>
+  
+  <script>
+    fetch('/api/map')
+      .then(r => r.json())
+      .then(data => {
+        let container = document.getElementById('map-container');
+        // Render mapping table here
+        container.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+      });
+  </script>
+</body>
+</html>
