@@ -1,1 +1,20 @@
+image: gitpod/workspace-full
 
+tasks:
+  - name: Setup ESP32
+    init: |
+      # Install PlatformIO
+      pip install platformio
+      # Setup ESP32
+      pio platform install espressif32
+      pio lib install "ESPAsyncWebServer" "AsyncTCP" "SPIFFS"
+    command: pio run
+
+vscode:
+  extensions:
+    - platformio.platformio-ide
+    - redhat.vscode-yaml
+
+ports:
+  - port: 80
+    onOpen: open-browser
