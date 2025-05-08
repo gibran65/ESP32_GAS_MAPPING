@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <WiFi.h>
-#include <SPIFFS.h>
+#include <LittleFS.h>
 #include <ESPAsyncWebServer.h>
 
 // Config
@@ -14,11 +14,13 @@ float gasMap[12][24]; // Contoh data mapping
 void setup() {
   Serial.begin(115200);
   
-  // Init SPIFFS
-  if(!SPIFFS.begin()){
-    Serial.println("SPIFFS Mount Failed");
+if(!LittleFS.begin()){  // Ganti dari SPIFFS.begin()
+    Serial.println("Gagal mount LittleFS");
     return;
   }
+  
+  server.serveStatic("/", LittleFS, "/");  // Ganti parameter
+}
 
   // WiFi AP Mode
   WiFi.softAP(AP_SSID, AP_PASS);
